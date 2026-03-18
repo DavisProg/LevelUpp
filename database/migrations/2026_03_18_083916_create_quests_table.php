@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('quests', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('description');
+            $table->enum("stat", ["strength", "constitution", "intelligence", "charisma"]);
+            $table->enum("difficulty", ["easy", "medium", "hard"]);
+            $table->enum("status", ["pending", "in_progress", "completed"]);
             $table->timestamps();
         });
     }

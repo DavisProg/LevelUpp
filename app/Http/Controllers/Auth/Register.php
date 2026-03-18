@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
+class Register extends Controller
+{
+    public function __invoke(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            ]);
+                // Create the user
+                $user = User::create([
+                    'name' =&gt; $validated['name'],
+                    'email' =&gt; $validated['email'],
+                    'password' =&gt; Hash::make($validated['password']),
+                ]);
+            
+                // Log them in
+                Auth::login($user);
+            
+                // Redirect to home
+                return redirect('/')-&gt;with('success', 'Welcome to Chirper!');
+    }
+}

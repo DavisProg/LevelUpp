@@ -18,15 +18,15 @@ class Register extends Controller
             ]);
                 // Create the user
                 $user = User::create([
-                    'name' =&gt; $validated['name'],
-                    'email' =&gt; $validated['email'],
-                    'password' =&gt; Hash::make($validated['password']),
+                    'name' => $validated['name'],
+                    'email' => $validated['email'],
+                    'password' => Hash::make($validated['password']),
                 ]);
             
                 // Log them in
                 Auth::login($user);
             
                 // Redirect to home
-                return redirect('/')-&gt;with('success', 'Welcome to Chirper!');
+                return redirect('/')->with('success', 'Welcome to Chirper!');
     }
 }

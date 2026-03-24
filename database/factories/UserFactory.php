@@ -30,6 +30,13 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'strength' => fake()->randomElement(['F', 'E', 'D', 'C', 'B', 'A', 'S']),
+            'constitution' => fake()->randomElement(['F', 'E', 'D', 'C', 'B', 'A', 'S']),
+            'intelligence' => fake()->randomElement(['F', 'E', 'D', 'C', 'B', 'A', 'S']),
+            'charisma' => fake()->randomElement(['F', 'E', 'D', 'C', 'B', 'A', 'S']),
+            'daily_quest_count' => 3,
+            'quest_attributes' => ['strength', 'constitution', 'intelligence', 'charisma'],
+            'last_daily_refresh' => now(),
         ];
     }
 

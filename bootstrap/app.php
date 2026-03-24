@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'not.completed.assessment' => \App\Http\Middleware\NotCompletedAssessment::class,
+            'require.completed.assessment' => \App\Http\Middleware\RequireCompletedAssessment::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

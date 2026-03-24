@@ -7,23 +7,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class Register extends Controller
+class RegisterController extends Controller
 {
-    public function __invoke(Request $request)
+    public function register(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            ]);
-                $user = User::create([
-                    'name' => $validated['name'],
-                    'email' => $validated['email'],
-                    'password' => Hash::make($validated['password']),
-                ]);
-            
-                Auth::login($user);
-            
-                return redirect('/')->with('success', 'Welcome to Chirper!');
+        ]);
+
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'strength' => 'F',
+            'constitution' => 'F',
+            'intelligence' => 'F',
+            'charisma' => 'F',
+            'assessment_completed' => false,
+        ]);
+
+        Auth::login($user);
+
+        return redirect()->route('assessment')->with('success', 'Account created! Please complete the stat assessment.');
     }
 }

@@ -18,9 +18,6 @@ class Quest extends Model
         'status',
     ];
 
-    /**
-     * Get the parsed description with stat calculations for a user.
-     */
     public function getParsedDescription(User $user): string
     {
         $description = $this->description;

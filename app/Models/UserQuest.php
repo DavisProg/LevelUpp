@@ -11,17 +11,11 @@ class UserQuest extends Model
 
     protected $fillable = ['user_id', 'quest_id', 'status'];
 
-    /**
-     * Get the user that owns this quest progress.
-     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * Get the quest.
-     */
     public function quest()
     {
         return $this->belongsTo(Quest::class);

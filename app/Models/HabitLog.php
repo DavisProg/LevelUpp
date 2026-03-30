@@ -11,17 +11,11 @@ class HabitLog extends Model
 
     protected $fillable = ['habit_id', 'user_id', 'type'];
 
-    /**
-     * Get the habit this log belongs to.
-     */
     public function habit()
     {
         return $this->belongsTo(Habit::class);
     }
 
-    /**
-     * Get the user that owns this log.
-     */
     public function user()
     {
         return $this->belongsTo(User::class);
